@@ -1,0 +1,16 @@
+{
+  "name": "api-motor-shop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Projeto-final-m6/Api-MotorSHOP.git",
+  "author": "time-02",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "typescript": "^4.9.5"
+  }
+}
