@@ -40,11 +40,14 @@ export class User {
   @Column({ type: "timestamptz" })
   dateOfBirth: Date;
 
-  @Column({ type: "boolean", nullable: false, default: false })
+  @Column({ type: "boolean", nullable: false })
   isAdvertiser: boolean;
 
   @Column({ type: "varchar" })
   img: string;
+
+  @Column({ type: "boolean", nullable: false })
+  isActive: boolean;
 
   @OneToOne(() => Address, {
     eager: true,

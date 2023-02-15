@@ -7,6 +7,7 @@ import { Bid } from "./entities/Bid.entity";
 import { Comment } from "./entities/Comments.entity";
 import { initial1676387974969 } from "./migrations/1676387974969-initial";
 import { addImgEntity1676468524148 } from "./migrations/1676468524148-addImgEntity";
+import { addingUserIsActive1676472522453 } from "./migrations/1676472522453-addingUserIsActive";
 import { Image } from "./entities/Image.entity";
 
 const AppDataSource = new DataSource(
@@ -29,7 +30,11 @@ const AppDataSource = new DataSource(
         // entities: ["src/entities/*.ts"],
         entities: [User, Address, Announcement, Bid, Comment, Image],
         // migrations: ["src/migrations/*.ts"],
-        migrations: [initial1676387974969, addImgEntity1676468524148],
+        migrations: [
+          initial1676387974969,
+          addImgEntity1676468524148,
+          addingUserIsActive1676472522453,
+        ],
       }
 );
 
