@@ -46,7 +46,7 @@ export class User {
   @Column({ type: "varchar" })
   img: string;
 
-  @Column({ type: "boolean", nullable: false })
+  @Column({ type: "boolean", nullable: false, default: true })
   isActive: boolean;
 
   @OneToOne(() => Address, {
