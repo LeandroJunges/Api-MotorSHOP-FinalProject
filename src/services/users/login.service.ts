@@ -8,35 +8,35 @@ import "dotenv/config";
 const loginService = async (email: string, password: string) => {
   const usersRepository = AppDataSource.getRepository(User);
 
-  const user: User | null = await usersRepository.findOne({
+  const userFind: User | null = await usersRepository.findOne({
     where: { email: email },
   });
 
-  if (!user) {
+  if (!userFind) {
     throw new AppError(403, "Incorrect email or password");
   }
 
-  const passwordMatch = await bcrypt.compare(password, user.password);
+  const passwordMatch = await bcrypt.compare(password, userFind.password);
 
   if (!passwordMatch) {
     throw new AppError(403, "Incorrect email or password");
   }
 
-  if (user.isActive === false) {
-    await usersRepository.update(user.id, { isActive: true });
+  if (userFind.isActive === false) {
+    await usersRepository.update(userFind.id, { isActive: true });
   }
 
   const token = jwt.sign(
-    { id: user.id, email: user.email },
+    { id: userFind.id, email: userFind.email },
     process.env.SECRET_KEY!,
     { expiresIn: "24h" }
   );
 
-  const userReturn: User | null = await usersRepository.findOne({
+  const user: User | null = await usersRepository.findOne({
     where: { email: email },
   });
 
-  return { userReturn, token };
+  return { user, token };
 };
 
 export default loginService;

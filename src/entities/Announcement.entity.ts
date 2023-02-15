@@ -10,6 +10,7 @@ import {
 import { User } from "./User.entity";
 import { v4 as uuid } from "uuid";
 import { Image } from "./Image.entity";
+import { Comment } from "./Comments.entity";
 
 @Entity("announcements")
 export class Announcement {
@@ -47,10 +48,18 @@ export class Announcement {
   @JoinColumn()
   user: User;
 
+  @Column({ type: "varchar" })
+  year: string;
+
   @OneToMany(() => Image, (image) => image.announcement, {
     eager: true,
   })
   imgs: Image[];
+
+  @OneToMany(() => Comment, (comment) => comment.announcement, {
+    eager: true,
+  })
+  comments: Comment[];
 
   constructor() {
     if (!this.id) {

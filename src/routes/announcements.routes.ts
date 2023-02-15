@@ -1,6 +1,7 @@
 import { Express } from "express";
 import createAnnoucementeController from "../controllers/announcements/createAnnouncements.controller";
 import deleteAnnouncementController from "../controllers/announcements/deleteAnnouncement.controller";
+import { listOneAnnouncementController } from "../controllers/announcements/listOneAnnounc.controller";
 import soldAnnouncementController from "../controllers/announcements/soldAnnouncement.controller";
 import updateAnnouncementController from "../controllers/announcements/updateAnnouncement.controller";
 import createUserController from "../controllers/users/createUser.controller";
@@ -27,6 +28,11 @@ const announcementsRoutes = (app: Express) => {
     "/announcements/:id",
     verifyAuthMiddleware,
     deleteAnnouncementController
+  );
+  app.get(
+    "/announcements/:announcementId",
+    verifyAuthMiddleware,
+    listOneAnnouncementController
   );
 };
 

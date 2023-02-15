@@ -13,8 +13,7 @@ const createAnnoucementeService = async (
 ) => {
   const {
     description,
-    imgFront,
-    imgsGallery,
+    imgMain,
     isAuction,
     mileage,
     price,
@@ -27,8 +26,7 @@ const createAnnoucementeService = async (
   if (
     !(
       description &&
-      imgFront &&
-      imgsGallery &&
+      imgMain &&
       mileage &&
       price &&
       title &&
