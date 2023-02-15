@@ -5,7 +5,10 @@ import { Address } from "./entities/Address.entity";
 import { Announcement } from "./entities/Announcement.entity";
 import { Bid } from "./entities/Bid.entity";
 import { Comment } from "./entities/Comments.entity";
-import { initial1676387974969 } from "./migration/1676387974969-initial";
+import { initial1676387974969 } from "./migrations/1676387974969-initial";
+import { addImgEntity1676468524148 } from "./migrations/1676468524148-addImgEntity";
+import { addingUserIsActive1676472522453 } from "./migrations/1676472522453-addingUserIsActive";
+import { Image } from "./entities/Image.entity";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
@@ -25,9 +28,13 @@ const AppDataSource = new DataSource(
         logging: true,
         synchronize: false,
         // entities: ["src/entities/*.ts"],
-        entities: [User, Address, Announcement, Bid, Comment],
+        entities: [User, Address, Announcement, Bid, Comment, Image],
         // migrations: ["src/migrations/*.ts"],
-        migrations: [initial1676387974969],
+        migrations: [
+          initial1676387974969,
+          addImgEntity1676468524148,
+          addingUserIsActive1676472522453,
+        ],
       }
 );
 

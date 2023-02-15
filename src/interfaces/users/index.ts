@@ -12,5 +12,6 @@ export interface IUserRequest {
   city: string;
   street: string;
   number: string;
+  img: string;
   complement?: string;
 }
