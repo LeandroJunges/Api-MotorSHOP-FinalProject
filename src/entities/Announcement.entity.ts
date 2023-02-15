@@ -43,7 +43,7 @@ export class Announcement {
   @Column({ nullable: true })
   imgMain: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { eager: true })
   @JoinColumn()
   user: User;
 
