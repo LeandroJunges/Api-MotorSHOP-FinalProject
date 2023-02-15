@@ -27,7 +27,7 @@ export class User {
   @Column({ nullable: false, unique: true })
   cpf: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   cellphone: string;
 
   @Column({ nullable: false, type: "varchar" })
@@ -43,6 +43,9 @@ export class User {
   @Column({ type: "boolean", nullable: false, default: false })
   isAdvertiser: boolean;
 
+  @Column({ type: "varchar" })
+  img: string;
+
   @OneToOne(() => Address, {
     eager: true,
   })
@@ -50,7 +53,7 @@ export class User {
   address: Address;
 
   @OneToMany(() => Bid, (bid) => bid.user)
-  photos: Bid[];
+  bids: Bid[];
 
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
