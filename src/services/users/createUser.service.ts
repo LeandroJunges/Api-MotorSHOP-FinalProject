@@ -65,6 +65,7 @@ const createUserService = async ({
   user.dateOfBirth = dateOfBirth;
   user.isAdvertiser = isAdvertiser;
   user.img = img;
+  user.isActive = true;
 
   address.cep = cep;
   address.state = state;
