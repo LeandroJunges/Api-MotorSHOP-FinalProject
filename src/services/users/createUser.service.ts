@@ -33,7 +33,6 @@ const createUserService = async ({
       cpf &&
       description &&
       dateOfBirth &&
-      isAdvertiser &&
       cep &&
       state &&
       city &&
@@ -50,8 +49,21 @@ const createUserService = async ({
     where: { email: email },
   });
 
-  if (emailAlreadyExists)
-    throw new AppError(400, "Em-mail is already being used");
+  const cpfAlreadyExists = await usersRepository.findOne({
+    where: { cpf: cpf },
+  });
+
+  const cellphoneAlreadyExists = await usersRepository.findOne({
+    where: { cellphone: cellphone },
+  });
+
+  if (emailAlreadyExists) {
+    throw new AppError(400, "E-mail is already being used");
+  } else if (cpfAlreadyExists) {
+    throw new AppError(400, "Cpf is already being used");
+  } else if (cellphoneAlreadyExists) {
+    throw new AppError(400, "Cellphone is already being used");
+  }
 
   const user = new User();
   const address = new Address();
@@ -63,9 +75,12 @@ const createUserService = async ({
   user.password = await hash(password, 10);
   user.description = description;
   user.dateOfBirth = dateOfBirth;
-  user.isAdvertiser = isAdvertiser;
   user.img = img;
   user.isActive = true;
+
+  isAdvertiser
+    ? (user.isAdvertiser = isAdvertiser)
+    : (user.isAdvertiser = false);
 
   address.cep = cep;
   address.state = state;
