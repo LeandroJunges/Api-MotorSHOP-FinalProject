@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+} from "typeorm";
 import { User } from "./User.entity";
 import { v4 as uuid } from "uuid";
 import { Announcement } from "./Announcement.entity";
@@ -18,6 +25,9 @@ export class Bid {
   @ManyToOne(() => User)
   @JoinColumn()
   user: User;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   constructor() {
     if (!this.id) {

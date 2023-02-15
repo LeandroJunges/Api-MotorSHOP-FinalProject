@@ -5,9 +5,11 @@ import {
   ManyToOne,
   JoinColumn,
   CreateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { User } from "./User.entity";
 import { v4 as uuid } from "uuid";
+import { Image } from "./Image.entity";
 
 @Entity("announcements")
 export class Announcement {
@@ -39,14 +41,16 @@ export class Announcement {
   initialBid: number;
 
   @Column({ nullable: true })
-  imgFront: string;
-
-  @Column({ nullable: true })
-  imgsGallery: string;
+  imgMain: string;
 
   @ManyToOne(() => User, { eager: true })
   @JoinColumn()
   user: User;
+
+  @OneToMany(() => Image, (image) => image.announcement, {
+    eager: true,
+  })
+  imgs: Image[];
 
   constructor() {
     if (!this.id) {
