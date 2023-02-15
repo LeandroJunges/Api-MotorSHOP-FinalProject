@@ -29,6 +29,33 @@ export const editUserService = async (
     throw new AppError(403, "You can't update your password here");
   }
 
+  if (req.email) {
+    const userFind = await usersRepository.findOneBy({
+      email: req.email,
+    });
+    if (userFind) {
+      throw new AppError(400, "E-mail is already being used");
+    }
+  }
+
+  if (req.cellphone) {
+    const userFind = await usersRepository.findOneBy({
+      cellphone: req.cellphone,
+    });
+    if (userFind) {
+      throw new AppError(400, "Cellphone is already being used");
+    }
+  }
+
+  if (req.cpf) {
+    const userFind = await usersRepository.findOneBy({
+      cpf: req.cpf,
+    });
+    if (userFind) {
+      throw new AppError(400, "Cpf is already being used");
+    }
+  }
+
   await usersRepository.update(id, req);
 
   const userUpdated = await usersRepository.findOneBy({

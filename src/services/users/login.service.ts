@@ -22,12 +22,21 @@ const loginService = async (email: string, password: string) => {
     throw new AppError(403, "Incorrect email or password");
   }
 
+  if (user.isActive === false) {
+    await usersRepository.update(user.id, { isActive: true });
+  }
+
   const token = jwt.sign(
     { id: user.id, email: user.email },
     process.env.SECRET_KEY!,
     { expiresIn: "24h" }
   );
-  return { user, token };
+
+  const userReturn: User | null = await usersRepository.findOne({
+    where: { email: email },
+  });
+
+  return { userReturn, token };
 };
 
 export default loginService;

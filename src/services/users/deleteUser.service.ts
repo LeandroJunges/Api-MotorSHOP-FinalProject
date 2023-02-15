@@ -16,6 +16,10 @@ export const deleteUserService = async (id: string, userId: string) => {
     throw new AppError(403, "User can only delete himself");
   }
 
+  if (userFind.isActive === false) {
+    throw new AppError(403, "User's aready soft deleted");
+  }
+
   await usersRepository.update(id, { isActive: false });
 
   const userUpdated = await usersRepository.findOneBy({
