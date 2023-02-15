@@ -20,6 +20,7 @@ const createUserService = async ({
   street,
   number,
   complement,
+  img,
 }: IUserRequest) => {
   const usersRepository = AppDataSource.getRepository(User);
   const addressRepository = AppDataSource.getRepository(Address);
@@ -38,7 +39,8 @@ const createUserService = async ({
       city &&
       cellphone &&
       street &&
-      number
+      number &&
+      img
     )
   ) {
     throw new AppError(400, "All required field must be filled");
@@ -62,6 +64,8 @@ const createUserService = async ({
   user.description = description;
   user.dateOfBirth = dateOfBirth;
   user.isAdvertiser = isAdvertiser;
+  user.img = img;
+  user.isActive = true;
 
   address.cep = cep;
   address.state = state;

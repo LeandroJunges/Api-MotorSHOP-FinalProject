@@ -1,4 +1,5 @@
 export interface IUserRequest {
+
   name          : string;
   email         : string;
   cpf           : string;
@@ -23,4 +24,16 @@ export interface IAddressRequest{
     number    : string;
     complement: string;
     street    : string;
+
 }
+
+export interface IUserUpdate {
+  name        ?: string;
+  email       ?: string;
+  cpf         ?: string;
+  cellphone   ?: string;
+  description ?: string;
+  dateOfBirth ?: Date;
+  isAdvertiser?: boolean;
+}
+
