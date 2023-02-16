@@ -18,12 +18,13 @@ const listAnnouncementCommentsService = async (announcementId: string) => {
   comments.forEach((c) => {
     let obj = {};
     const { user, ...rest } = c;
-    const { id, name, ...nest } = user;
+    const { id, name, img, ...nest } = user;
     obj = {
       ...rest,
       user: {
         id,
         name,
+        img,
       },
     };
     commentsArray.push(obj);
