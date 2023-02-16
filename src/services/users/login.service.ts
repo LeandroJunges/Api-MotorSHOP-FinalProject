@@ -27,7 +27,11 @@ const loginService = async (email: string, password: string) => {
   }
 
   const token = jwt.sign(
-    { id: userFind.id, email: userFind.email },
+    {
+      id: userFind.id,
+      email: userFind.email,
+      isAdvertiser: userFind.isAdvertiser,
+    },
     process.env.SECRET_KEY!,
     { expiresIn: "24h" }
   );
