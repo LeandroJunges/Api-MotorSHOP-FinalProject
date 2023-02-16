@@ -11,6 +11,7 @@ import { User } from "./User.entity";
 import { v4 as uuid } from "uuid";
 import { Image } from "./Image.entity";
 import { Comment } from "./Comments.entity";
+import { Exclude } from "class-transformer";
 
 @Entity("announcements")
 export class Announcement {

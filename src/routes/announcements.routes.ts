@@ -1,6 +1,7 @@
 import { Express } from "express";
 import createAnnoucementeController from "../controllers/announcements/createAnnouncements.controller";
 import deleteAnnouncementController from "../controllers/announcements/deleteAnnouncement.controller";
+import listAnnouncementsController from "../controllers/announcements/listAnnouncements.controller";
 import { listOneAnnouncementController } from "../controllers/announcements/listOneAnnounc.controller";
 import soldAnnouncementController from "../controllers/announcements/soldAnnouncement.controller";
 import updateAnnouncementController from "../controllers/announcements/updateAnnouncement.controller";
@@ -9,6 +10,7 @@ import loginController from "../controllers/users/login.controller";
 import verifyAuthMiddleware from "../middlewares/verifyAuth.middleware";
 
 const announcementsRoutes = (app: Express) => {
+  app.get("/announcements", listAnnouncementsController);
   app.post(
     "/announcements",
     verifyAuthMiddleware,
