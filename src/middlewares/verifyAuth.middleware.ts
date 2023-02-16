@@ -29,6 +29,7 @@ const verifyAuthMiddleware = (
       req.user = {
         id: decoded.id,
         email: decoded.email,
+        isAdvertiser: decoded.isAdvertiser,
       };
 
       next();

@@ -1,3 +1,5 @@
+import { User } from "../../entities/User.entity";
+
 export interface IAnnouncement {
   isAuction: boolean;
   vehicleType: string;
@@ -21,5 +23,14 @@ export interface IAnnouncementCreate {
   imgMain: string;
   year: string;
   initialBid?: number;
-  isSold: boolean;
+  isSold?: boolean;
+  imgs?: {
+    img1?: string;
+    img2?: string;
+    img3?: string;
+    img4?: string;
+    img5?: string;
+    img6?: string;
+  };
+  user?: User;
 }
