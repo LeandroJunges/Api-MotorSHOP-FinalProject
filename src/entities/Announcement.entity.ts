@@ -42,6 +42,9 @@ export class Announcement {
   @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })
   initialBid: number;
 
+  @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })
+  actualBid: number;
+
   @Column({ nullable: true })
   imgMain: string;
 

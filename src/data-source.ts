@@ -11,6 +11,7 @@ import { Image } from "./entities/Image.entity";
 // import { addingUserIsActive1676472522453 } from "./migrations/1676472522453-addingUserIsActive";
 // import { addAnnouncYear1676496645026 } from "./migrations/1676496645026-addAnnouncYear";
 import { initialTest1676496921661 } from "./migrations/1676496921661-initialTest";
+import { addActualBidAnnounc1676566012997 } from "./migrations/1676566012997-addActualBidAnnounc";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
@@ -38,7 +39,10 @@ const AppDataSource = new DataSource(
         //   addingUserIsActive1676472522453,
         //   addAnnouncYear1676496645026,
         // ],
-        migrations: [initialTest1676496921661],
+        migrations: [
+          initialTest1676496921661,
+          addActualBidAnnounc1676566012997,
+        ],
       }
 );
 
