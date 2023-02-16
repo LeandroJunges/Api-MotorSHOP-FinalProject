@@ -6,8 +6,6 @@ import { listOneAnnouncementController } from "../controllers/announcements/list
 import listUserAnnouncementsController from "../controllers/announcements/listUserAnnounc.controller";
 import soldAnnouncementController from "../controllers/announcements/soldAnnouncement.controller";
 import updateAnnouncementController from "../controllers/announcements/updateAnnouncement.controller";
-import createUserController from "../controllers/users/createUser.controller";
-import loginController from "../controllers/users/login.controller";
 import verifyAuthMiddleware from "../middlewares/verifyAuth.middleware";
 
 const announcementsRoutes = (app: Express) => {
@@ -19,17 +17,17 @@ const announcementsRoutes = (app: Express) => {
     createAnnoucementeController
   );
   app.patch(
-    "/announcements/:id/sold",
+    "/announcements/:announcementId/sold",
     verifyAuthMiddleware,
     soldAnnouncementController
   );
   app.patch(
-    "/announcements/:id",
+    "/announcements/:announcementId",
     verifyAuthMiddleware,
     updateAnnouncementController
   );
   app.delete(
-    "/announcements/:id",
+    "/announcements/:announcementId",
     verifyAuthMiddleware,
     deleteAnnouncementController
   );

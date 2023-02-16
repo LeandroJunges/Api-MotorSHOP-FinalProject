@@ -23,7 +23,7 @@ const listAnnouncementsService = async (req: any) => {
   let refactored: any[] = [];
 
   filteredAnnouncements.forEach((ann) => {
-    const { user, comments, ...rest } = ann;
+    const { user, comments, bids, imgs, ...rest } = ann;
 
     const { address, password, ...nest } = user;
 

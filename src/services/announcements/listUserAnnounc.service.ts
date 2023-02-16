@@ -39,7 +39,7 @@ const listUserAnnouncementsService = async (userId: string, req: Object) => {
   let refactored: any[] = [];
 
   filteredAnnouncements.forEach((ann) => {
-    const { user, comments, imgs, ...rest } = ann;
+    const { user, comments, bids, ...rest } = ann;
 
     const { address, password, ...nest } = user;
 

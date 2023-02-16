@@ -12,9 +12,9 @@ const listOneAnnouncementService = async (announcementId: string) => {
     throw new AppError(404, "Announcement not found");
   }
 
-  const { user, comments, ...rest } = announcementFind;
+  const { user, comments, bids, ...rest } = announcementFind;
 
-  const { address, ...nest } = user;
+  const { address, password, ...nest } = user;
 
   return { ...rest, user: { ...nest } };
 };
