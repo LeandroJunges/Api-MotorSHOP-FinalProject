@@ -4,12 +4,11 @@ export interface IAnnouncement {
   title: string;
   mileage: number;
   description: string;
-  price: number;
+  price?: number;
   isSold: boolean;
   initialBid?: number;
-  imgFront: string;
-  imgsGallery: string;
-  year?: string;
+  imgMain: string;
+  year: string;
 }
 
 export interface IAnnouncementCreate {
@@ -18,9 +17,9 @@ export interface IAnnouncementCreate {
   title: string;
   mileage: number;
   description: string;
-  price: number;
-  imgFront: string;
-  imgsGallery: string;
-  year?: string;
+  price?: number;
+  imgMain: string;
+  year: string;
+  initialBid?: number;
   isSold: boolean;
 }

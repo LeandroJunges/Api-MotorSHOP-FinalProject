@@ -25,7 +25,9 @@ export class Comment {
   @JoinColumn()
   announcement: Announcement;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    eager: true,
+  })
   @JoinColumn()
   user: User;
 
