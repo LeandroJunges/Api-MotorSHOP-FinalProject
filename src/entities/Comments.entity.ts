@@ -21,7 +21,9 @@ export class Comment {
   @Column({ nullable: false })
   description: string;
 
-  @ManyToOne(() => Announcement)
+  @ManyToOne(() => Announcement, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   announcement: Announcement;
 

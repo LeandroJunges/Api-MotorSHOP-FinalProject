@@ -18,7 +18,9 @@ export class Bid {
   @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })
   value: number;
 
-  @ManyToOne(() => Announcement)
+  @ManyToOne(() => Announcement, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   announcement: Announcement;
 

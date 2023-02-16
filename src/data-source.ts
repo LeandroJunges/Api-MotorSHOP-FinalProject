@@ -12,6 +12,9 @@ import { Image } from "./entities/Image.entity";
 // import { addAnnouncYear1676496645026 } from "./migrations/1676496645026-addAnnouncYear";
 import { initialTest1676496921661 } from "./migrations/1676496921661-initialTest";
 import { addActualBidAnnounc1676566012997 } from "./migrations/1676566012997-addActualBidAnnounc";
+import { addDelCascadeImgAnn1676573798163 } from "./migrations/1676573798163-addDelCascadeImgAnn";
+import { addDelCascadeCommAnn1676576083351 } from "./migrations/1676576083351-addDelCascadeCommAnn";
+import { addDelCascadeBidsAnn1676578918727 } from "./migrations/1676578918727-addDelCascadeBidsAnn";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
@@ -33,15 +36,12 @@ const AppDataSource = new DataSource(
         // entities: ["src/entities/*.ts"],
         entities: [User, Address, Announcement, Bid, Comment, Image],
         // migrations: ["src/migrations/*.ts"],
-        // migrations: [
-        //   initial1676387974969,
-        //   addImgEntity1676468524148,
-        //   addingUserIsActive1676472522453,
-        //   addAnnouncYear1676496645026,
-        // ],
         migrations: [
           initialTest1676496921661,
           addActualBidAnnounc1676566012997,
+          addDelCascadeImgAnn1676573798163,
+          addDelCascadeCommAnn1676576083351,
+          addDelCascadeBidsAnn1676578918727,
         ],
       }
 );

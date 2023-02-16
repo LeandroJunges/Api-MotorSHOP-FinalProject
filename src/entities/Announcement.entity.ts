@@ -12,6 +12,7 @@ import { v4 as uuid } from "uuid";
 import { Image } from "./Image.entity";
 import { Comment } from "./Comments.entity";
 import { Exclude } from "class-transformer";
+import { Bid } from "./Bid.entity";
 
 @Entity("announcements")
 export class Announcement {
@@ -57,11 +58,19 @@ export class Announcement {
 
   @OneToMany(() => Image, (image) => image.announcement, {
     eager: true,
+    cascade: true,
   })
   imgs: Image[];
 
+  @OneToMany(() => Bid, (bid) => bid.announcement, {
+    eager: true,
+    cascade: true,
+  })
+  bids: Bid[];
+
   @OneToMany(() => Comment, (comment) => comment.announcement, {
     eager: true,
+    cascade: true,
   })
   comments: Comment[];
 

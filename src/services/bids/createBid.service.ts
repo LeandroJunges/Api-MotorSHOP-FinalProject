@@ -33,6 +33,10 @@ const createBidService = async (
     throw new AppError(403, "Not auction announcements can't receive bids");
   }
 
+  if (announcFind.isSold === true) {
+    throw new AppError(403, "Not able to make bids to a sold auction");
+  }
+
   if (value <= Number(announcFind.initialBid)) {
     throw new AppError(
       403,
@@ -48,31 +52,38 @@ const createBidService = async (
     },
   });
 
-  announcBids.sort(function (a, b) {
-    if (Number(a.value) > Number(b.value)) {
-      return 1;
-    }
-    if (Number(a.value) < Number(b.value)) {
-      return -1;
-    }
-    // a must be equal to b
-    return 0;
-  });
+  if (announcBids.length > 0) {
+    announcBids.sort(function (a, b) {
+      if (Number(a.value) > Number(b.value)) {
+        return 1;
+      }
+      if (Number(a.value) < Number(b.value)) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
 
-  if (value <= announcBids[announcBids.length - 1].value) {
-    throw new AppError(
-      403,
-      "Can't create bid under or equal the actual bid, that is: " +
-        announcBids[announcBids.length - 1].value
-    );
-  }
-  if (announcBids.length === 0) {
-    await announcementsRepository.update(announcFind.id, { actualBid: value });
+    if (value <= announcBids[announcBids.length - 1].value) {
+      throw new AppError(
+        403,
+        "Can't create bid under or equal the actual bid, that is: " +
+          announcBids[announcBids.length - 1].value
+      );
+    }
+    if (announcBids.length === 0) {
+      await announcementsRepository.update(announcFind.id, {
+        actualBid: value,
+      });
+    }
+
+    if (value > announcBids[announcBids.length - 1].value) {
+      await announcementsRepository.update(announcFind.id, {
+        actualBid: value,
+      });
+    }
   }
 
-  if (value > announcBids[announcBids.length - 1].value) {
-    await announcementsRepository.update(announcFind.id, { actualBid: value });
-  }
   const newBid = new Bid();
   newBid.value = value;
   newBid.announcement = announcFind;
@@ -80,6 +91,16 @@ const createBidService = async (
 
   const bidCreated = await bidsRepository.save(newBid);
 
-  return bidCreated;
+  const desconstructAnn = (a: Announcement) => {
+    const { id, title, ...rest } = a;
+    return { id, title };
+  };
+
+  const desconstruct = () => {
+    const { id, value, announcement, user } = bidCreated;
+    return { id, value, announcement: desconstructAnn(announcement) };
+  };
+
+  return desconstruct();
 };
 export default createBidService;

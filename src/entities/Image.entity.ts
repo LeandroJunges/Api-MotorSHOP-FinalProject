@@ -10,7 +10,9 @@ export class Image {
   @Column({ type: "varchar" })
   link: number;
 
-  @ManyToOne(() => Announcement)
+  @ManyToOne(() => Announcement, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   announcement: Announcement;
 
