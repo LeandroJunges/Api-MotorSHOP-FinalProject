@@ -31,11 +31,7 @@ const announcementsRoutes = (app: Express) => {
     verifyAuthMiddleware,
     deleteAnnouncementController
   );
-  app.get(
-    "/announcements/:announcementId",
-    verifyAuthMiddleware,
-    listOneAnnouncementController
-  );
+  app.get("/announcements/:announcementId", listOneAnnouncementController);
 };
 
 export default announcementsRoutes;

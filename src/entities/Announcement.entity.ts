@@ -63,7 +63,6 @@ export class Announcement {
   imgs: Image[];
 
   @OneToMany(() => Bid, (bid) => bid.announcement, {
-    eager: true,
     cascade: true,
   })
   bids: Bid[];
