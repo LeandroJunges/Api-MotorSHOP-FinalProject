@@ -82,10 +82,28 @@ const createAnnoucementeService = async (
     });
 
     if (images) {
+      const rightImg: any = [];
       if (Object.keys(images).length > 6) {
         throw new AppError(403, "Max of six images addable");
       }
       let image: string;
+
+      for (image in images) {
+        const found = rightImg.find(
+          (e: string) =>
+            e === images[image as keyof IAnnouncementCreate["imgs"]]
+        );
+
+        if (found) {
+          throw new AppError(
+            400,
+            "Not able to put duplicate images in announcement"
+          );
+        } else {
+          rightImg.push(images[image as keyof IAnnouncementCreate["imgs"]]);
+        }
+      }
+
       for (image in images) {
         const newImg = new Image();
         newImg.link = images[image as keyof IAnnouncementCreate["imgs"]];
@@ -140,10 +158,27 @@ const createAnnoucementeService = async (
   });
 
   if (images) {
+    const rightImg: any = [];
     if (Object.keys(images).length > 6) {
       throw new AppError(403, "Max of six images addable");
     }
     let image: string;
+
+    for (image in images) {
+      const found = rightImg.find(
+        (e: string) => e === images[image as keyof IAnnouncementCreate["imgs"]]
+      );
+
+      if (found) {
+        throw new AppError(
+          400,
+          "Not able to put duplicate images in announcement"
+        );
+      } else {
+        rightImg.push(images[image as keyof IAnnouncementCreate["imgs"]]);
+      }
+    }
+
     for (image in images) {
       const newImg = new Image();
       newImg.link = images[image as keyof IAnnouncementCreate["imgs"]];

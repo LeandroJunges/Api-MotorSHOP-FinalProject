@@ -1,18 +1,37 @@
 import AppDataSource from "../../data-source";
 import { Announcement } from "../../entities/Announcement.entity";
+import { Image } from "../../entities/Image.entity";
+import { User } from "../../entities/User.entity";
 import { AppError } from "../../errors/appError";
-import { IAnnouncement } from "../../interfaces/announcements";
+import {
+  IAnnouncement,
+  IAnnouncementCreate,
+} from "../../interfaces/announcements";
 
 const updateAnnouncementService = async (
-  data: IAnnouncement,
+  data: IAnnouncementCreate,
   adId: string,
   userId: string
 ) => {
+  const imagesRepository = AppDataSource.getRepository(Image);
+  const announcementsRepository = AppDataSource.getRepository(Announcement);
+
+  const handleImage = async (link: string, annId: string) => {
+    const annFound = await announcementsRepository.findOneBy({ id: annId });
+
+    const newImg = new Image();
+    newImg.link = link;
+    newImg.announcement = annFound!;
+    await imagesRepository.save(newImg);
+  };
+
+  const { imgs, ...rest } = data;
+
+  const newData: IAnnouncement = { ...rest };
+
   if (Object.keys(data).length < 1) {
     throw new AppError(409, "You need to pass at least one argument to update");
   }
-
-  const announcementsRepository = AppDataSource.getRepository(Announcement);
 
   const announcement = await announcementsRepository.findOneBy({ id: adId });
 
@@ -34,7 +53,27 @@ const updateAnnouncementService = async (
           "To turn an auction into a normal sell, must change 'initialBid' to 'price' keys"
         );
       }
-      await announcementsRepository.update({ id: adId }, data);
+      //AQUII
+      if (imgs) {
+        const imagesFound = await imagesRepository.find({
+          where: {
+            announcement: {
+              id: adId,
+            },
+          },
+        });
+        imagesFound.forEach(async (e) => {
+          await imagesRepository.delete(e);
+        });
+        let img: string;
+        for (img in imgs) {
+          await handleImage(
+            imgs[img as keyof IAnnouncementCreate["imgs"]],
+            adId
+          );
+        }
+      }
+      await announcementsRepository.update({ id: adId }, newData);
       await announcementsRepository.update({ id: adId }, { initialBid: 0 });
 
       const updatedAnnouncement = await announcementsRepository.findOneBy({
@@ -58,8 +97,27 @@ const updateAnnouncementService = async (
           "To turn a announcement into an auction, must change 'price' to 'initialBid' key"
         );
       }
-
-      await announcementsRepository.update({ id: adId }, data);
+      //AQUII
+      if (imgs) {
+        const imagesFound = await imagesRepository.find({
+          where: {
+            announcement: {
+              id: adId,
+            },
+          },
+        });
+        imagesFound.forEach(async (e) => {
+          await imagesRepository.delete(e);
+        });
+        let img: string;
+        for (img in imgs) {
+          await handleImage(
+            imgs[img as keyof IAnnouncementCreate["imgs"]],
+            adId
+          );
+        }
+      }
+      await announcementsRepository.update({ id: adId }, newData);
       await announcementsRepository.update({ id: adId }, { price: 0 });
 
       const updatedAnnouncement = await announcementsRepository.findOneBy({
@@ -87,7 +145,24 @@ const updateAnnouncementService = async (
     }
   }
 
-  await announcementsRepository.update({ id: adId }, data);
+  //AQUII
+  if (imgs) {
+    const imagesFound = await imagesRepository.find({
+      where: {
+        announcement: {
+          id: adId,
+        },
+      },
+    });
+    imagesFound.forEach(async (e) => {
+      await imagesRepository.delete(e);
+    });
+    let img: string;
+    for (img in imgs) {
+      await handleImage(imgs[img as keyof IAnnouncementCreate["imgs"]], adId);
+    }
+  }
+  await announcementsRepository.update({ id: adId }, newData);
 
   const updatedAnnouncement = await announcementsRepository.findOneBy({
     id: adId,

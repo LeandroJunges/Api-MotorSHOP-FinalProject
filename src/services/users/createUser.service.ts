@@ -42,7 +42,7 @@ const createUserService = async ({
       img
     )
   ) {
-    throw new AppError(400, "All required field must be filled");
+    throw new AppError(400, "All required fields must be filled");
   }
 
   const emailAlreadyExists = await usersRepository.findOne({

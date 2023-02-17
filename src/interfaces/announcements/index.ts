@@ -7,7 +7,7 @@ export interface IAnnouncement {
   mileage: number;
   description: string;
   price?: number;
-  isSold: boolean;
+  isSold?: boolean;
   initialBid?: number;
   imgMain: string;
   year: string;
