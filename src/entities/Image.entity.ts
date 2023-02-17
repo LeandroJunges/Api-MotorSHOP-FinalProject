@@ -8,7 +8,7 @@ export class Image {
   readonly id: string;
 
   @Column({ type: "varchar" })
-  link: number;
+  link: string;
 
   @ManyToOne(() => Announcement, {
     onDelete: "CASCADE",

@@ -17,6 +17,10 @@ const createCommentService = async (
     id: id,
   });
 
+  if (!description) {
+    throw new AppError(400, "Description field is required");
+  }
+
   const announcement = await announcRepository.findOneBy({
     id: announcementId,
   });
