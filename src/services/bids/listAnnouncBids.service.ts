@@ -36,10 +36,25 @@ const listAnnouncementBidsService = async (announcementId: string) => {
 
   let bidsRefactored: IBidReturn[] = [];
 
+  const refactUser = (u: any) => {
+    const { id, name, ...rest } = u;
+    return { id, name };
+  };
+  const refacAnn = (a: any) => {
+    const { id, title, ...rest } = a;
+    return { id, title };
+  };
+
   bids.forEach((bid) => {
-    const { user, ...rest } = bid;
-    const { id, name, ...nest } = user;
-    bidsRefactored.push({ ...rest, user: { id, name } });
+    const { id, value, createdAt, announcement, user, ...rest } = bid;
+
+    bidsRefactored.push({
+      id,
+      value,
+      createdAt,
+      user: refactUser(user),
+      announcement: refacAnn(announcement),
+    });
   });
 
   return bidsRefactored;

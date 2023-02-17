@@ -19,6 +19,7 @@ export class Bid {
   value: number;
 
   @ManyToOne(() => Announcement, {
+    eager: true,
     onDelete: "CASCADE",
   })
   @JoinColumn()
