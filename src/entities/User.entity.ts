@@ -37,6 +37,9 @@ export class User {
   @Column({ type: "varchar" })
   description: string;
 
+  // @Column()
+  // dateOfBirth: Date;
+
   @Column({ type: "timestamptz" })
   dateOfBirth: Date;
 

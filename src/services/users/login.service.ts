@@ -8,8 +8,8 @@ import "dotenv/config";
 const loginService = async (email: string, password: string) => {
   const usersRepository = AppDataSource.getRepository(User);
 
-  const userFind: User | null = await usersRepository.findOne({
-    where: { email: email },
+  const userFind: User | null = await usersRepository.findOneBy({
+    email: email,
   });
 
   if (!userFind) {

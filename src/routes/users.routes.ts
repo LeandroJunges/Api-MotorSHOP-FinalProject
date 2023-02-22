@@ -11,7 +11,7 @@ const usersRoutes = (app: Express) => {
   app.post("/users", createUserController);
   app.patch("/users/:userId", verifyAuthMiddleware, editUserController);
   app.delete("/users/:userId", verifyAuthMiddleware, deleteUserController);
-  app.get("/users/:user_id", listUserController);
+  app.get("/users/:userId", listUserController);
 };
 
 export default usersRoutes;

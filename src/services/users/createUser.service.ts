@@ -75,7 +75,9 @@ const createUserService = async ({
   user.password = await hash(password, 10);
   user.description = description;
   user.dateOfBirth = dateOfBirth;
-  user.img = img;
+  if (img) {
+    user.img = img;
+  }
   user.isActive = true;
 
   isAdvertiser
