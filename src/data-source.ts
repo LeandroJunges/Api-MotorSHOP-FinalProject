@@ -22,7 +22,7 @@ const AppDataSource = new DataSource(
         type: "sqlite",
         database: ":memory:",
         synchronize: true,
-        entities: ["src/entities/**.{js, ts}"],
+        entities: [User, Address, Announcement, Bid, Comment, Image],
       }
     : {
         type: "postgres",
