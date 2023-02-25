@@ -75,6 +75,7 @@ const updateAnnouncementService = async (
       }
       await announcementsRepository.update({ id: adId }, newData);
       await announcementsRepository.update({ id: adId }, { initialBid: 0 });
+      await announcementsRepository.update({ id: adId }, { actualBid: 0 });
 
       const updatedAnnouncement = await announcementsRepository.findOneBy({
         id: adId,

@@ -37,8 +37,8 @@ const listAnnouncementBidsService = async (announcementId: string) => {
   let bidsRefactored: IBidReturn[] = [];
 
   const refactUser = (u: any) => {
-    const { id, name, ...rest } = u;
-    return { id, name };
+    const { id, name, img, ...rest } = u;
+    return { id, name, img };
   };
   const refacAnn = (a: any) => {
     const { id, title, ...rest } = a;
