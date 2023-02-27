@@ -2,6 +2,7 @@ import AppDataSource from "../../data-source";
 import { User } from "../../entities/User.entity";
 import { AppError } from "../../errors/appError";
 import { IUserUpdate } from "../../interfaces/users";
+import bcrypt from "bcrypt";
 
 export const editUserService = async (
   id: string,
@@ -11,22 +12,18 @@ export const editUserService = async (
   const usersRepository = AppDataSource.getRepository(User);
 
   const userFind = await usersRepository.findOneBy({
-    id: userId,
+    id: id,
   });
 
   if (!userFind) {
     throw new AppError(404, "User don't exists");
   }
-  if (userId !== id) {
-    throw new AppError(403, "User can only edit himself");
-  }
+  // if (userId !== id) {
+  //   throw new AppError(403, "User can only edit himself");
+  // }
 
   if (req.hasOwnProperty("isActive")) {
     throw new AppError(403, "You can't soft delete user in this route");
-  }
-
-  if (req.hasOwnProperty("password")) {
-    throw new AppError(403, "You can't update your password here");
   }
 
   if (req.email) {
@@ -56,10 +53,12 @@ export const editUserService = async (
     }
   }
 
-  await usersRepository.update(id, req);
+  const hashedPassword = req.password && bcrypt.hashSync(req.password, 10);
+
+  await usersRepository.update(id, { ...req, password: hashedPassword });
 
   const userUpdated = await usersRepository.findOneBy({
-    id: userId,
+    id: id,
   });
 
   const { password, ...rest } = userUpdated!;
