@@ -43,8 +43,8 @@ const listUserAnnouncementsService = async (userId: string, req: Object) => {
 
     const { address, password, ...nest } = user;
 
-    // refactored.push({ ...rest, user: { ...nest } });
-    refactored.push({ ...rest });
+    refactored.push({ ...rest, user: { ...nest } });
+    // refactored.push({ ...rest });
   });
 
   return refactored;
