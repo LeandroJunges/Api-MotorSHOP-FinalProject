@@ -70,6 +70,7 @@ export interface IAddressRequest {
 export interface IUserUpdate {
   name?: string;
   email?: string;
+  password?: string;
   cpf?: string;
   cellphone?: string;
   description?: string;
