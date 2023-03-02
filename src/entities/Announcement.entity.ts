@@ -49,7 +49,7 @@ export class Announcement {
   @Column({ nullable: true })
   imgMain: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   user: User;
 

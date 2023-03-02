@@ -27,6 +27,7 @@ export class Bid {
 
   @ManyToOne(() => User, {
     eager: true,
+    onDelete: "CASCADE",
   })
   @JoinColumn()
   user: User;

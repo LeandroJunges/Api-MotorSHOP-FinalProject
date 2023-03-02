@@ -15,6 +15,8 @@ import { addActualBidAnnounc1676566012997 } from "./migrations/1676566012997-add
 import { addDelCascadeImgAnn1676573798163 } from "./migrations/1676573798163-addDelCascadeImgAnn";
 import { addDelCascadeCommAnn1676576083351 } from "./migrations/1676576083351-addDelCascadeCommAnn";
 import { addDelCascadeBidsAnn1676578918727 } from "./migrations/1676578918727-addDelCascadeBidsAnn";
+import { entites1677761154758 } from "./migrations/1677761154758-entites";
+import { entites1677761526992 } from "./migrations/1677761526992-entites";
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
@@ -42,8 +44,11 @@ const AppDataSource = new DataSource(
           addDelCascadeImgAnn1676573798163,
           addDelCascadeCommAnn1676576083351,
           addDelCascadeBidsAnn1676578918727,
+          entites1677761154758,
+          entites1677761526992,
         ],
       }
 );
+
 
 export default AppDataSource;
