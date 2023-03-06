@@ -1,6 +1,6 @@
 import AppDataSource from "../../data-source";
 import { User } from "../../entities/User.entity";
-import { IUserRequest } from "../../interfaces/users";
+import { IUserCreateErrors, IUserRequest } from "../../interfaces/users";
 import { AppError } from "../../errors/appError";
 import { hash } from "bcrypt";
 import { Address } from "../../entities/Address.entity";
@@ -57,12 +57,20 @@ const createUserService = async ({
     where: { cellphone: cellphone },
   });
 
+  let errors: IUserCreateErrors = {};
+
   if (emailAlreadyExists) {
-    throw new AppError(400, "E-mail is already being used");
-  } else if (cpfAlreadyExists) {
-    throw new AppError(400, "Cpf is already being used");
-  } else if (cellphoneAlreadyExists) {
-    throw new AppError(400, "Cellphone is already being used");
+    errors["email"] = "E-mail is already being used";
+  } 
+  if (cpfAlreadyExists) {
+    errors["cpf"] = "CPF is already being used";
+  } 
+  if (cellphoneAlreadyExists) {
+    errors["cellphone"] = "CellPhone is already being used";
+  }
+
+  if (emailAlreadyExists || cpfAlreadyExists || cellphoneAlreadyExists) {
+    throw new AppError(400, errors);
   }
 
   const user = new User();

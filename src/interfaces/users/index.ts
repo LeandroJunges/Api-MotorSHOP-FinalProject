@@ -81,3 +81,9 @@ export interface IUserUpdate {
 export interface IUserWrongUpdate extends IUserUpdate {
   password?: string;
 }
+
+export interface IUserCreateErrors {
+  email?: string;
+  cpf?: string;
+  cellphone?: string;
+}
