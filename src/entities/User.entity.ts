@@ -21,13 +21,13 @@ export class User {
   @Column({ nullable: false })
   name: string;
 
-  @Column({ nullable: false, unique: true })
+  @Column({ unique: true })
   email: string;
 
-  @Column({ nullable: false, unique: true })
+  @Column({unique: true })
   cpf: string;
 
-  @Column({ nullable: false, unique: true })
+  @Column({unique: true })
   cellphone: string;
 
   @Column({ nullable: false, type: "varchar" })
@@ -36,9 +36,6 @@ export class User {
 
   @Column({ type: "varchar" })
   description: string;
-
-  // @Column()
-  // dateOfBirth: Date;
 
   @Column({ type: "timestamptz" })
   dateOfBirth: Date;
@@ -49,7 +46,7 @@ export class User {
   @Column({ type: "varchar" })
   img: string;
 
-  @Column({ type: "boolean", nullable: false, default: true })
+  @Column({ type: "boolean", default: true })
   isActive: boolean;
 
   @OneToOne(() => Address, {
