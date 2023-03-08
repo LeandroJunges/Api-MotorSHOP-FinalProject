@@ -51,17 +51,24 @@ export class User {
 
   @OneToOne(() => Address, {
     eager: true,
+    cascade: true,
   })
   @JoinColumn()
   address: Address;
 
-  @OneToMany(() => Bid, (bid) => bid.user)
+  @OneToMany(() => Bid, (bid) => bid.user, {
+    cascade: true,
+  })
   bids: Bid[];
 
-  @OneToMany(() => Comment, (comment) => comment.user)
+  @OneToMany(() => Comment, (comment) => comment.user, {
+    cascade: true,
+  })
   comments: Comment[];
 
-  @OneToMany(() => Announcement, (announcement) => announcement.user)
+  @OneToMany(() => Announcement, (announcement) => announcement.user, {
+    cascade: true,
+  })
   announcements: Announcement[];
 
   constructor() {

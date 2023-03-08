@@ -1,4 +1,4 @@
-import AppDataSource from "../../data-source";
+import {AppDataSource }from "../../data-source";
 import { Announcement } from "../../entities/Announcement.entity";
 import { Comment } from "../../entities/Comments.entity";
 

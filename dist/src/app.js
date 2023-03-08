@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+require("express-async-errors");
+const express_1 = __importDefault(require("express"));
+const routes_1 = require("./routes");
+const error_middleware_1 = __importDefault(require("./middlewares/error.middleware"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const bodyParser = require("body-parser");
+const swaggerFile = require("./swagger/swagger_output.json");
+let cors = require("cors");
+const app = (0, express_1.default)();
+app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerFile));
+app.use(express_1.default.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+(0, routes_1.routes)(app);
+app.use(error_middleware_1.default);
+exports.default = app;

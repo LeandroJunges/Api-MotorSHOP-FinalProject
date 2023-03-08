@@ -1,4 +1,4 @@
-import AppDataSource from "../../data-source";
+import {AppDataSource} from "../../data-source";
 import { User } from "../../entities/User.entity";
 import { IUserCreateErrors, IUserRequest } from "../../interfaces/users";
 import { AppError } from "../../errors/appError";

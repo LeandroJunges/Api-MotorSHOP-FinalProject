@@ -1,4 +1,4 @@
-import AppDataSource from "../../data-source";
+import {AppDataSource }from "../../data-source";
 import { Comment } from "../../entities/Comments.entity";
 import { User } from "../../entities/User.entity";
 import { AppError } from "../../errors/appError";

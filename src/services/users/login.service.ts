@@ -1,5 +1,5 @@
 import { User } from "../../entities/User.entity";
-import AppDataSource from "../../data-source";
+import {AppDataSource} from "../../data-source";
 import { AppError } from "../../errors/appError";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";

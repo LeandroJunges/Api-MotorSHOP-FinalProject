@@ -1,4 +1,4 @@
-import AppDataSource from "../../data-source";
+import {AppDataSource} from "../../data-source";
 import { User } from "../../entities/User.entity";
 import { AppError } from "../../errors/appError";
 import jwt from "jsonwebtoken";

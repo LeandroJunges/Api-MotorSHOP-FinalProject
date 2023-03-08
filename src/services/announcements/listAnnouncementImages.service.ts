@@ -1,4 +1,4 @@
-import AppDataSource from "../../data-source";
+import {AppDataSource} from "../../data-source";
 import { Image } from "../../entities/Image.entity";
 
 const listAnnouncementImagesService = async (announcementId: string) => {

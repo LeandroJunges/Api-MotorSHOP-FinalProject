@@ -1,5 +1,5 @@
 import { IAddressRequest } from './../../interfaces/users/index';
-import AppDataSource from "../../data-source"
+import {AppDataSource} from "../../data-source"
 import { Address } from "../../entities/Address.entity"
 import { User } from "../../entities/User.entity"
 import { AppError } from '../../errors/appError';
