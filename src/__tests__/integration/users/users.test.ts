@@ -1,4 +1,4 @@
-import AppDataSource from "../../../data-source";
+import {AppDataSource} from "../../../data-source";
 import app from "../../../app";
 import { DataSource } from "typeorm";
 import { describe } from "node:test";
