@@ -30,7 +30,7 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "typeorm": "typeorm-ts-node-commonjs",
     "swagger-autogen": "ts-node-dev src/swagger.ts"
   },
